@@ -1,0 +1,13 @@
+{
+    "name": "railsphp/willpaginate",
+    "description": "Pagination helper for RailsPHP Framework",
+    "autoload": {
+        "psr-0": {
+            "WillPaginate\\": ""
+        }
+    },
+    "target-dir": "WillPaginate",
+    "require": {
+        "php": ">=5.4.0"
+    }
+}
