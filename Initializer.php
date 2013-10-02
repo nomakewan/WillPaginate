@@ -5,6 +5,6 @@ class Initializer
 {
     public function initialize()
     {
-        WillPaginate\WillPaginate::initialize();
+        WillPaginate::initialize();
     }
 }
