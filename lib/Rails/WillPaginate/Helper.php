@@ -20,11 +20,11 @@ class Helper extends \Rails\ActionView\Helper
         $option = $this->config()->renderer();
         
         if ($option == 'legacy') {
-            return 'WillPaginate\Renderer\Legacy';
+            return 'Rails\WillPaginate\Renderer\Legacy';
         } elseif ($option == 'bootstrap2') {
-            return 'WillPaginate\Renderer\Bootstrap2';
+            return 'Rails\WillPaginate\Renderer\Bootstrap2';
         } elseif ($option == 'bootstrap3') {
-            return 'WillPaginate\Renderer\Bootstrap3';
+            return 'Rails\WillPaginate\Renderer\Bootstrap3';
         } else {
             return $option;
         }

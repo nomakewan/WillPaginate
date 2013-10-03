@@ -170,6 +170,6 @@ abstract class Base
     
     protected function getLocale($key)
     {
-        return \WillPaginate\WillPaginate::getLocale($key);
+        return Rails\WillPaginate\WillPaginate::getLocale($key);
     }
 }
