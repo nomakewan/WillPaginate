@@ -10,7 +10,7 @@ abstract class WillPaginate
     static public function initialize()
     {
         self::$config = new Config();
-        \Rails\ActionView\ViewHelpers::addHelper('WillPaginate\Helper');
+        \Rails\ActionView\ViewHelpers::addHelper('Rails\WillPaginate\Helper');
     }
     
     static public function config()
