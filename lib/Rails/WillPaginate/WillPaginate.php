@@ -1,5 +1,5 @@
 <?php
-namespace WillPaginate;
+namespace Rails\WillPaginate;
 
 abstract class WillPaginate
 {

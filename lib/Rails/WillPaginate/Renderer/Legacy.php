@@ -1,5 +1,5 @@
 <?php
-namespace WillPaginate\Renderer;
+namespace Rails\WillPaginate\Renderer;
 
 class Legacy extends Base
 {

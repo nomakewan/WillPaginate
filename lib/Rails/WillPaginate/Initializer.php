@@ -1,5 +1,5 @@
 <?php
-namespace WillPaginate;
+namespace Rails\WillPaginate;
 
 class Initializer
 {
