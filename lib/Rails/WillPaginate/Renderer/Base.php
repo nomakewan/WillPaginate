@@ -155,7 +155,8 @@ abstract class Base
     
     protected function link($text, $page, array $attrs = [])
     {
-        return $this->helper->linkTo($text, array_merge(['#index'], $this->params()->get(), ['page' => $page]), $attrs);
+        $path = Rails::application()->dispatcher()->request()->path();
+        return $this->helper->linkTo($text, array_merge([$path], $this->params()->get(), ['page' => $page]), $attrs);
     }
     
     protected function tag($type, $content, array $attrs = [])
