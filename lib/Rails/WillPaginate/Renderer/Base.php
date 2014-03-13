@@ -38,13 +38,19 @@ abstract class Base
         return $this->options['container'] ? $this->htmlContainer($html) : $html;
     }
     
+    /**
+     * Default options.
+     * By default the target controller#action is the current one. This can be
+     * changed by passing 'to' option containing a different path token.
+     */
     protected function defaultOptions()
     {
         return [
             'previousLabel' => '&#8592; ' . $this->getLocale('previous'),
             'nextLabel'     => $this->getLocale('next') . ' &#8594;',
             'container'     => true,
-            'linkSeparator' => ' '
+            'linkSeparator' => ' ',
+            'to'            => null,
         ];
     }
     
@@ -160,7 +166,11 @@ abstract class Base
     
     protected function link($text, $page, array $attrs = [])
     {
-        $path = Rails::application()->dispatcher()->request()->path();
+        if ($this->options['to']) {
+            $path = $this->options['to'];
+        } else {
+            $path = Rails::application()->dispatcher()->request()->path();
+        }
         return $this->helper->linkTo($text, array_merge([$path], $this->params()->get(), ['page' => $page]), $attrs);
     }
     
