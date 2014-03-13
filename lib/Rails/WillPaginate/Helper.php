@@ -9,14 +9,18 @@ class Helper extends \Rails\ActionView\Helper
             return '';
         }
         
-        $rendererClass = $this->rendererClass();
+        $rendererClass = $this->rendererClass($options);
         $renderer = new $rendererClass($this, $collection, $options);
         
         return $renderer->toHtml();
     }
     
-    protected function rendererClass()
+    protected function rendererClass(array $options)
     {
+        if (isset($options['renderer'])) {
+            return $options['renderer'];
+        }
+        
         $option = $this->config()->renderer();
         
         if ($option == 'legacy') {
