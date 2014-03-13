@@ -33,7 +33,7 @@ abstract class Base
             } else {
                 return $this->$item();
             }
-        }, $this->pagination()), $this->options['link_separator']);
+        }, $this->pagination()), $this->options['linkSeparator']);
         
         return $this->options['container'] ? $this->htmlContainer($html) : $html;
     }
@@ -41,19 +41,23 @@ abstract class Base
     protected function defaultOptions()
     {
         return [
-            'previous_label' => '&#8592; ' . $this->getLocale('previous'),
-            'next_label'     => $this->getLocale('next') . ' &#8594;',
-            'container'      => true,
-            'link_separator' => ' '
+            'previousLabel' => '&#8592; ' . $this->getLocale('previous'),
+            'nextLabel'     => $this->getLocale('next') . ' &#8594;',
+            'container'     => true,
+            'linkSeparator' => ' '
         ];
     }
     
     protected function pageNumber($page)
     {
-        if ($page != $this->collection->currentPage())
+        if ($page != $this->collection->currentPage()) {
+            if ($page == $this->collection->totalPages() && !$this->options['lastPage']) {
+                return '';
+            }
             return $this->link($page, $page, ['rel' => $this->relValue($page)]);
-        else
+        } else {
             return $this->tag('span', $page, ['class' => 'current']);
+        }
     }
     
     protected function gap()
@@ -65,22 +69,23 @@ abstract class Base
     {
         $num = $this->collection->currentPage() > 1 ?
                     $this->collection->currentPage() - 1 : false;
-        return $this->previousOrNextPage($num, $this->options['previous_label'], 'previousPage');
+        return $this->previousOrNextPage($num, $this->options['previousLabel'], 'previousPage');
     }
     
     protected function nextPage()
     {
         $num = $this->collection->currentPage() < $this->collection->totalPages() ?
                     $this->collection->currentPage() + 1 : false;
-        return $this->previousOrNextPage($num, $this->options['next_label'], 'nextPage');
+        return $this->previousOrNextPage($num, $this->options['nextLabel'], 'nextPage');
     }
     
     protected function previousOrNextPage($page, $text, $classname)
     {
-        if ($page)
+        if ($page) {
             return $this->link($text, $page, ['class' => $classname]);
-        else
+        } else {
             return $this->tag('span', $text, ['class' => $classname . ' disabled']);
+        }
     }
     
     protected function htmlContainer($html)

@@ -11,7 +11,7 @@ class Bootstrap3 extends Base
             } else {
                 return $this->$item();
             }
-        }, $this->pagination()), $this->options['link_separator']);
+        }, $this->pagination()), $this->options['linkSeparator']);
         
         return $this->htmlContainer($html);
     }
@@ -42,8 +42,8 @@ class Bootstrap3 extends Base
     protected function defaultOptions()
     {
         return array_merge(parent::defaultOptions(), [
-            'previous_label' => '«',
-            'next_label'     => '»'
+            'previousLabel' => '«',
+            'nextLabel'     => '»'
         ]);
     }
     
@@ -65,14 +65,14 @@ class Bootstrap3 extends Base
     {
         $num = $this->collection->currentPage() > 1 ?
                     $this->collection->currentPage() - 1 : false;
-        return $this->previousOrNextPage($num, $this->options['previous_label'], 'prev');
+        return $this->previousOrNextPage($num, $this->options['previousLabel'], 'prev');
     }
     
     protected function nextPage()
     {
         $num = $this->collection->currentPage() < $this->collection->totalPages() ?
                     $this->collection->currentPage() + 1 : false;
-        return $this->previousOrNextPage($num, $this->options['next_label'], 'next');
+        return $this->previousOrNextPage($num, $this->options['nextLabel'], 'next');
     }
     
     protected function previousOrNextPage($page, $text, $classname)
