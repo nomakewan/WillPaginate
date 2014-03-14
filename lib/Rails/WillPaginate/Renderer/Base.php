@@ -166,12 +166,23 @@ abstract class Base
     
     protected function link($text, $page, array $attrs = [])
     {
+        $request = Rails::application()->dispatcher()->request();
+        
         if ($this->options['to']) {
-            $path = $this->options['to'];
+            $path = [$this->options['to']];
         } else {
-            $path = Rails::application()->dispatcher()->request()->path();
+            $path = [
+                $request->controller() . '#' .
+                $request->action()
+            ];
         }
-        return $this->helper->linkTo($text, array_merge([$path], $this->params()->get(), ['page' => $page]), $attrs);
+        $params = array_merge($path, $this->params()->get(), $this->params()->route(), ['page' => $page]);
+        
+        if (!empty($params['format']) && $params['format'] == 'html' && substr($request->path(), -5) != '.html') {
+            unset($params['format']);
+        }
+        
+        return $this->helper->linkTo($text, $params, $attrs);
     }
     
     protected function tag($type, $content, array $attrs = [])
