@@ -58,7 +58,7 @@ class Bootstrap3 extends Base
     
     protected function gap()
     {
-        return $this->tag('li', $this->link('&hellip;', "#"), ['class' => 'disabled']);
+        return $this->tag('li', $this->tag('a', '&hellip;'), ['class' => 'disabled']);
     }
     
     protected function previousPage()
