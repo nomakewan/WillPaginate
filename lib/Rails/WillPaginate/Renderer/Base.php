@@ -57,7 +57,10 @@ abstract class Base
     protected function pageNumber($page)
     {
         if ($page != $this->collection->currentPage()) {
-            if ($page == $this->collection->totalPages()) {
+            if (
+                $page == $this->collection->totalPages() &&
+                (isset($this->options['lastPage']) && !$this->options['lastPage'])
+            ) {
                 return '';
             }
             return $this->link($page, $page, ['rel' => $this->relValue($page)]);
