@@ -27,13 +27,13 @@ abstract class Base
     
     public function toHtml()
     {
-        $html = implode(array_map(function($item){
+        $html = implode($this->options['linkSeparator'], array_map(function($item){
             if (is_int($item)) {
                 return $this->pageNumber($item);
             } else {
                 return $this->$item();
             }
-        }, $this->pagination()), $this->options['linkSeparator']);
+        }, $this->pagination()));
         
         return $this->options['container'] ? $this->htmlContainer($html) : $html;
     }
